@@ -8,8 +8,8 @@ setup(
     author='peterkeen',
     author_email='',
     license='MIT',
-    package_dir={"": "neopixel_effects"},
-    packages=find_packages(where="neopixel_effects"),
+    package_dir={"": "."},
+    packages=find_packages(where="."),
     zip_safe=False,
     install_requires=[],
 )
