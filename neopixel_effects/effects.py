@@ -118,7 +118,7 @@ class RainbowEffect(BaseEffect):
         self.change_per_frame = change_per_frame
 
         for i in range(num_pixels):
-            rgb = colorsys.hsv_to_rgb(i/(num_pixels + length_multiplier), 1.0, brightness)
+            rgb = colorsys.hsv_to_rgb(i/(num_pixels * length_multiplier), 1.0, brightness)
             self.pixels[i] = [rgb[0], rgb[1], rgb[2]]
             if self.include_white_channel:
                 self.pixels[i][3] = 0.0
