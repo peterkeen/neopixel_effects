@@ -125,10 +125,10 @@ class RainbowEffect(BaseEffect):
 
     def next_frame(self):
         for i in range(len(self.pixels)):
-            p = self.pixels[i]
+            p = self.pixels[i][0:3]
             hsv = list(colorsys.rgb_to_hsv(*p))
             hsv[0] += self.change_per_frame
             rgb = colorsys.hsv_to_rgb(*hsv)
             self.pixels[i] = list(rgb)
             if self.include_white_channel:
-                self.pixels[i][3] = 0.0
+                self.pixels[i].append(0.0)
