@@ -113,11 +113,12 @@ class BlendEffect(BaseEffect):
 
 
 class RainbowEffect(BaseEffect):
-    def __init__(self, *args, brightness=0.05, **kwargs):
+    def __init__(self, *args, brightness=0.05, change_per_frame=0.005, length_multiplier=0.0, **kwargs):
         super().__init__(*args, **kwargs)
+        self.change_per_frame = change_per_frame
 
         for i in range(num_pixels):
-            rgb = colorsys.hsv_to_rgb(i/(num_pixels + 0.0), 1.0, brightness)
+            rgb = colorsys.hsv_to_rgb(i/(num_pixels + length_multiplier), 1.0, brightness)
             self.pixels[i] = [rgb[0], rgb[1], rgb[2]]
             if self.include_white_channel:
                 self.pixels[i][3] = 0.0
@@ -126,7 +127,7 @@ class RainbowEffect(BaseEffect):
         for i in range(len(self.pixels)):
             p = self.pixels[i]
             hsv = list(colorsys.rgb_to_hsv(*p))
-            hsv[0] += 0.005
+            hsv[0] += self.change_per_frame
             rgb = colorsys.hsv_to_rgb(*hsv)
             self.pixels[i] = list(rgb)
             if self.include_white_channel:
